@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/url_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="URL"
+        android:inputType="textUri"
+        app:layout_constraintEnd_toStartOf="@+id/load_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/load_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Load"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/url_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/url_edit" />
+
+    <EditText
+        android:id="@+id/origin_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Origin"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/delete_origin_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/url_edit" />
+
+    <Button
+        android:id="@+id/delete_origin_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Delete"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/origin_edit"
+        app:layout_constraintEnd_toStartOf="@+id/get_usage_button"
+        app:layout_constraintTop_toTopOf="@+id/origin_edit" />
+
+    <Button
+        android:id="@+id/get_usage_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Usage"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/origin_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/origin_edit" />
+
+    <Button
+        android:id="@+id/get_origins_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="getOrigins"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/delete_all_data_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/origin_edit" />
+
+    <Button
+        android:id="@+id/delete_all_data_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="deleteAllData"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/delete_cache_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/get_origins_button"
+        app:layout_constraintTop_toBottomOf="@+id/origin_edit" />
+
+    <Button
+        android:id="@+id/delete_cache_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Delete cache"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/delete_all_data_button"
+        app:layout_constraintTop_toBottomOf="@+id/origin_edit" />
+
+    <Button
+        android:id="@+id/restart_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Restart"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/delete_cookies_button"
+        app:layout_constraintTop_toBottomOf="@+id/delete_cache_button" />
+
+    <Button
+        android:id="@+id/delete_cookies_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Delete cookies"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/restart_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_cache_button" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_cookies_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
