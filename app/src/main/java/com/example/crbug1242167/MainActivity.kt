@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.format.Formatter
+import android.view.Menu
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
 import android.webkit.WebStorage
@@ -21,12 +22,15 @@ import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
+    private val sharedPrefs by lazy {
+        getSharedPreferences("main", Context.MODE_PRIVATE)
+    }
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.plant(Timber.DebugTree())
         super.onCreate(savedInstanceState)
-        val sharedPrefs = getSharedPreferences("main", Context.MODE_PRIVATE)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.webview.webViewClient = WebViewClientImpl()
@@ -94,7 +98,23 @@ class MainActivity : AppCompatActivity() {
                 Timber.d("finish cacheDir.deleteRecursively()")
             }
         }
-        binding.restartButton.setOnClickListener {
+        binding.clearServiceWorkerButton.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val serviceWorkerDir = getDir("webview", Context.MODE_PRIVATE)
+                    .resolve("Default")
+                    .resolve("Service Worker")
+                serviceWorkerDir.deleteRecursively()
+            }
+            Timber.d("Clear Service Worker")
+        }
+        binding.clearWebviewCacheButton.setOnClickListener {
+            binding.webview.clearCache(true)
+            Timber.d("webview.clearCache(true)")
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menu.add("Restart").setOnMenuItemClickListener {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     sharedPrefs.edit().commit()
@@ -104,7 +124,9 @@ class MainActivity : AppCompatActivity() {
                 val intent = KillProcessActivity.createIntent(this@MainActivity)
                 startActivity(intent)
             }
+            true
         }
+        return super.onCreateOptionsMenu(menu)
     }
 
     private inner class WebViewClientImpl : WebViewClient()
